@@ -4,7 +4,7 @@
 import java.util.Scanner;
 
 public class CaesarCipher {
-	public static String encrypt(String s, int shift) {
+	public static String caesarEncrypt(String s, int shift) {
 		if (shift>26) {
 			shift = shift%26;
 		}
@@ -38,7 +38,7 @@ public class CaesarCipher {
 		}
 		return cipher;
 	}
-	public static String decrypt(String s, int shift) {
+	public static String caesarDecrypt(String s, int shift) {
 		if (shift>26) {
 			shift = shift%26;
 		}
@@ -145,11 +145,12 @@ public class CaesarCipher {
 	  	shift = scan.nextInt();
 
 	  	System.out.println();
+	  	String encryptedCaesar = caesarEncrypt(message, shift);
+	  	String decryptedCaesar = caesarDecrypt(encryptedCaesar, shift);
 	  	System.out.println("Caesar Cipher:");
 	  	System.out.println(message);
-	  	String cipher = encrypt(message, shift);
-	  	System.out.println(cipher);
-	  	System.out.println(decrypt(cipher, shift));
+	  	System.out.println(encryptedCaesar);
+	  	System.out.println(decryptedCaesar);
 	  	
 		System.out.println();
 		String encryptedAugustus = augustusCipher(message);

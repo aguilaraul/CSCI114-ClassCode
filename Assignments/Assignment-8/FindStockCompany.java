@@ -80,13 +80,25 @@ public class FindStockCompany {
   }
 
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         String[] urls=new String[3];
         urls[0] = "http://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=AMEX&render=download";
         urls[1] = "http://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NYSE&render=download";
         urls[2] = "http://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NASDAQ&render=download";
         int counter = 0;       
-        Scanner in = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
+
+	URL url1 = new URL(urls[0]);
+	BufferedReader in = new BufferedReader(new InputStreamReader(url1.openStream()));
+
+	String inputLine;
+	while( (inputLine = in.readLine()) != null) {
+		System.out.println(inputLine);
+		counter++;
+	}
+	System.out.println(counter);
+	in.close();
+
 
         String content = getUrlContents(urls[0]);
         String[] lines = content.split("\\R+");
@@ -107,20 +119,20 @@ public class FindStockCompany {
 
         System.out.println(companies);
         System.out.println(lines[0]);
-        System.out.println(lines[counter]);
+        System.out.println(lines[counter-1]);
         
-        System.out.println("Please Enter a Stock Symbol to Search (Enter ‘0’ to exit): ");
-        String input = in.nextLine();
+        System.out.println("Please Enter a Stock Symbol to Search (Enter 0 to exit): ");
+        String input = scan.nextLine();
         while(input.equalsIgnoreCase("0") != true ) {
             System.out.println("Made it in");
-            input = in.nextLine();
+            input = scan.nextLine();
         }
         
 //      for (String url : urls) {
 //          String content1 = getUrlContents(url);
-//          String[] lines = content1.split("\\R+");
-//          for ( String line: lines ){
-//            System.out.println(counter + " ==> " + line);
+//          String[] lines2 = content1.split("\\R+");
+//         for ( String line: lines2 ){
+//          System.out.println(counter + " ==> " + line);
 //            String[] fields = line.split("\",");
 //            System.out.println(fields[0].replace("\"", ""));
 //            System.out.println(fields[1].replace("\"", ""));
